@@ -29,8 +29,6 @@ class Allumette(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
 allumette1 = Allumette()
-allumette2 = Allumette()
-
 
 while running :
     #appliquer l'arrière plan de notre jeu
