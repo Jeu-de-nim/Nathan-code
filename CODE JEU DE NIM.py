@@ -30,6 +30,11 @@ class Allumette(pygame.sprite.Sprite):
 
 allumette1 = Allumette()
 
+#définir le style et la taille de la police
+police = pygame.font.SysFont("monospace" ,45)
+
+image_texte = police.render ( "Appuyer sur 1,2 ou 3", 1 , (255,0,255) )
+
 while running :
     #appliquer l'arrière plan de notre jeu
     screen.blit(background,(0,0))
@@ -39,6 +44,9 @@ while running :
     for i in range(21):
         screen.blit(allumette1.image,(o,150))
         o+=50
+    
+    #appliquer le texte
+    screen.blit(image_texte, (300,150))
 
     #mettre à jour l'écran
     pygame.display.flip()
@@ -50,8 +58,15 @@ while running :
             running = False
             pygame.quit()
             print("Fermeture du jeu")
-
-
+    #détecter touche enfoncée        
+        if event.type == pygame.KEYDOWN:
+            print("A key has been pressed")
+            if event.key == pygame.K_1:
+                print("1")
+            if event.key == pygame.K_2:
+                print("2")
+            if event.key == pygame.K_3:
+                print("3")
 
 
 def saisirValeur(N):
@@ -65,9 +80,9 @@ def saisirValeur(N):
             valeur = 0
     return valeur
 
-def checkageVictoire(J,OUI):
-    if(OUI>0):
-        print("Tour ",J,": il reste :",OUI)
+def checkageVictoire(J,N):
+    if(N>0):
+        print("Tour ",J,": il reste :",N)
     else:
         print(J, " : Bravo tu as gagné ")
         sys.exit(0)
@@ -101,6 +116,7 @@ def jeu_avec_ordi(n):
         tourAllu = ia(N, valeur)
         N -= tourAllu
         checkageVictoire(J1, N)
+    
 
 def ia(N, valeur):
     if valeur == 1:
@@ -112,11 +128,9 @@ def ia(N, valeur):
 
 
 
-a = int(input("Entrer 1 pour jouer contre l'IA ou 2 pour jouer à 2 joueurs"))
+a = int(input("Entrer 1 pour jouer contre l'IA ou 2 pour jouer à 2 joueurs : "))
 if a == 2:
     joueurs(a)
 elif a == 1:
     jeu_avec_ordi(a)
-
-
 
